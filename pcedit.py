@@ -105,13 +105,30 @@ class Editor:
         self.stdscr.addch(ch)
 
     def main_loop(self):
+        self.draw_help_box(5, 120, 4, 10)
+        self.print_to_help_box('q - quit')
+        self.move_cursor_absolute(0, 0)
         while not self.x_pressed():
             y, x = self.stdscr.getyx()
-            self.draw_help_box(5, 120, 4, 10)
-            self.print_to_help_box('q - quit')
-            self.move_cursor_absolute(y, x)
             self.k = self.read_char()
-            self.print_char(self.k)
+
+            if self.k == 10:  # Return / new line key (enter)
+                self.print_char("\r")
+                self.move_cursor_absolute(y + 1, 0)
+            elif self.k == curses.KEY_UP:
+                # Prevent crashing by moving the cursor to a negative y value
+                if y > 0:
+                    self.move_cursor_relative(-1, 0)
+            elif self.k == curses.KEY_DOWN:
+                self.move_cursor_relative(+1, 0)
+            elif self.k == curses.KEY_LEFT:
+                # Prevent crashing by moving the cursor to a negative x value
+                if x > 0:
+                    self.move_cursor_relative(0, -1)
+            elif self.k == curses.KEY_RIGHT:
+                self.move_cursor_relative(0, +1)
+            else:
+                self.print_char(self.k)
 
     def start(self):
         self.initialize_cursor()
