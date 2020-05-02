@@ -33,7 +33,8 @@ class Editor:
 
     def print_to_help_box(self, msg):
         if self.help_box_dimensions:
-            self.move_cursor_absolute(self.help_box_dimensions.get('y') + 1, self.help_box_dimensions.get('x') + 1)
+            self.move_cursor_absolute(self.help_box_dimensions.get(
+                'y') + 1, self.help_box_dimensions.get('x') + 1)
             self.stdscr.addstr(msg)
             self.restore_cursor_position()
 
@@ -99,14 +100,16 @@ class Editor:
         self.move_cursor_absolute(y - 1, 0)
         self.stdscr.addch(v)
         self.restore_cursor_position()
-    
+
     def print_char(self, ch):
         self.stdscr.addch(ch)
 
     def main_loop(self):
-        self.draw_help_box(5, 120, 4, 10)
-        self.print_to_help_box('q - quit')
         while not self.x_pressed():
+            y, x = self.stdscr.getyx()
+            self.draw_help_box(5, 120, 4, 10)
+            self.print_to_help_box('q - quit')
+            self.move_cursor_absolute(y, x)
             self.k = self.read_char()
             self.print_char(self.k)
 
