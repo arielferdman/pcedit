@@ -9,6 +9,12 @@
       <w>nocbreak</w>
       <w>noecho</w>
       <w>pcedit</w>
+      <w>pmincol</w>
+      <w>pminrow</w>
+      <w>smaxcol</w>
+      <w>smaxrow</w>
+      <w>smincol</w>
+      <w>sminrow</w>
       <w>stdscr</w>
     </words>
   </dictionary>

@@ -1,6 +1,19 @@
 from _curses import *
 
 
+# class MyWindow(window):
+#     def __init__(self, *args, **kwargs):
+#         super(MyWindow, self).__init__(args, kwargs)
+#         self.hook = kwargs.get('refresh_hook', None)
+#
+#     def refresh(self, pminrow=None, pmincol=None, sminrow=None, smincol=None, smaxrow=None, smaxcol=None):
+#         if self.hook:
+#             self.hook()
+#
+#         super(MyWindow, self).refresh(pminrow=None, pmincol=None, sminrow=None, smincol=None, smaxrow=None,
+#                                       smaxcol=None)
+
+
 def wrapper(*args, **kwds):
     """Wrapper function that initializes curses and calls another function,
     restoring normal keyboard/screen behavior on error.
@@ -8,6 +21,12 @@ def wrapper(*args, **kwds):
     as its first argument, followed by any other arguments passed to
     wrapper().
     """
+    # def refresh_hook():
+    #     if
+    #
+    # original_refresh = refresh
+
+    # refresh = refresh_hook
 
     if args:
         func, *args = args
